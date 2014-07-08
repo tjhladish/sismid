@@ -1,141 +1,150 @@
+<!doctype html>
 <html>
-<head>
-<title> SISMID 2013, Module 9: Graphs and Network Theory in Infectious Diseases </title>
- <script type="text/javascript" src="protovis-d3.2.tom.js"></script>
-    <script type="text/javascript" src="miserables.js"></script>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>SISMID 2014: Module 9 by tjhladish</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-<style type="text/css">
-  body { background-image: url("sexual_net_edit.png");
-    margin-left: 50px; background-attachment:fixed;
-    font-family: arial,sans-serif;
-    font-size: 120% 
-  }
-  h4 { margin-bottom: 2px; }
-  td { padding: 10px; font-size: 120% }
-  </style>
-<head>
+  </head>
+  <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/tjhladish/sismid">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/tjhladish/sismid/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/tjhladish/sismid/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
 
-<body>
-<center><h1>SISMID 2013, Module 9:<br> Graphs and Network Theory in Infectious Diseases</h1></center>
-<center><h2>Instructors: Joel C. Miller and Thomas J. Hladish</h2></center>
+    <div class="wrapper">
 
-<h2>Handouts</h2>
+      <section>
+        <div id="title">
+          <h1>SISMID 2014: Module 9</h1>
+          <p></p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/tjhladish">tjhladish</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
+
+        <h1>
+<a name="graphs-and-network-theory-in-infectious-diseases" class="anchor" href="#graphs-and-network-theory-in-infectious-diseases"><span class="octicon octicon-link"></span></a>Graphs and Network Theory in Infectious Diseases</h1>
+
+<h2>
+<a name="joel-c-miller-and-thomas-j-hladish" class="anchor" href="#joel-c-miller-and-thomas-j-hladish"><span class="octicon octicon-link"></span></a>Joel C. Miller and Thomas J. Hladish</h2>
+
+<h3>
+<a name="handouts" class="anchor" href="#handouts"><span class="octicon octicon-link"></span></a>Handouts</h3>
+
 <table>
-    <tr> <td valign="top">
-            <h4>Monday, Sessions 1 & 2<br>
-            Tuesday, Sessions 1 & 2<br>
-            Wednesday, Session 1<br></h4>
-        </td>  
+<tr>
+<td valign="top">
+            <h4>
+<a name="monday-sessions-1--2------------tuesday-sessions-1--2------------wednesday-session-1" class="anchor" href="#monday-sessions-1--2------------tuesday-sessions-1--2------------wednesday-session-1"><span class="octicon octicon-link"></span></a>Monday, Sessions 1 &amp; 2<br>
+            Tuesday, Sessions 1 &amp; 2<br>
+            Wednesday, Session 1<br>
+</h4>
+        </td>
         <td valign="top">
-            <h3><A href="/miller_notes.pdf"> Miller Lecture Handout </a><br></h3>
-        </td></tr>
-
-    <tr> <td valign="top">
-            <h4>Monday, Session 3 (1:30-3:00)</h4>
-        </td>  
+            <h3>
+<a name="-miller-lecture-handout-" class="anchor" href="#-miller-lecture-handout-"><span class="octicon octicon-link"></span></a>
+<a href="/miller_notes.pdf"> Miller Lecture Handout </a><br>
+</h3>
+        </td>
+</tr>
+<tr>
+<td valign="top">
+            <h4>
+<a name="monday-session-3-130-300" class="anchor" href="#monday-session-3-130-300"><span class="octicon octicon-link"></span></a>Monday, Session 3 (1:30-3:00)</h4>
+        </td>
         <td valign="top">
-            <A href="/SISMID_EpiFire_Lab1.pdf"> Lab 1: EpiFire Handout </a><br>
-            <A href="/mystery_net.csv"> Lab 1: Mytery network file </a><br>
-        </td></tr>
-
-    <tr> <td valign="top">
-            <h4>Monday, Session 4 (3:30-5:00)</h4>
-        </td>  
+            <a href="/SISMID_EpiFire_Lab1.pdf"> Lab 1: EpiFire Handout </a><br><a href="/mystery_net.csv"> Lab 1: Mytery network file </a><br>
+</td>
+</tr>
+<tr>
+<td valign="top">
+            <h4>
+<a name="monday-session-4-330-500" class="anchor" href="#monday-session-4-330-500"><span class="octicon octicon-link"></span></a>Monday, Session 4 (3:30-5:00)</h4>
+        </td>
         <td valign="top">
-            <A href="/SISMID_Python_Lab2.pdf"> Lab 2: Python Handout </a><br>
-            <A href="/simple_edges.txt"> Lab 2: Simple edgelist file </a><br>
-         </td></tr>
-    <tr> <td valign="top">
-            <h4>Tuesday, Session 3 (1:30-3:00)</h4>
-        </td>  
+            <a href="/SISMID_Python_Lab2.pdf"> Lab 2: Python Handout </a><br><a href="/simple_edges.txt"> Lab 2: Simple edgelist file </a><br>
+</td>
+</tr>
+<tr>
+<td valign="top">
+            <h4>
+<a name="tuesday-session-3-130-300" class="anchor" href="#tuesday-session-3-130-300"><span class="octicon octicon-link"></span></a>Tuesday, Session 3 (1:30-3:00)</h4>
+        </td>
         <td valign="top">
-            <A href="/SISMID_Python_Lab3.pdf"> Lab 3: Python Handout </a><br>
-            <A href="/toy_edges.csv"> Lab 3: Toy edgelist file </a><br>
-            <A href="/sexual_net.csv"> Lab 3: Sexual contact edgelist file </a><br>
-            <A href="/shuffled_sexual_net.csv"> Lab 3: Randomized sexual contact edgelist file </a><br>
-            <A href="/urban_net.csv"> Lab 3: Urban edgelist file </a><br><br>
-
-            <A href="http://networkx.lanl.gov/"> NetworkX website </a><br>
-            <A href="http://networkx.lanl.gov/_downloads/networkx_tutorial.pdf"> NetworkX tutorial (8 pages) </a><br>
-            <A href="http://networkx.lanl.gov/_downloads/networkx_reference.pdf"> NetworkX manual (331 pages) </a><br>
-        </td></tr>
-    <tr> <td valign="top">
-            <h4>Tuesday, Session 4 (3:30-5:00)</h4>
-        </td>  
+            <a href="/SISMID_Python_Lab3.pdf"> Lab 3: Python Handout </a><br><a href="/toy_edges.csv"> Lab 3: Toy edgelist file </a><br><a href="/sexual_net.csv"> Lab 3: Sexual contact edgelist file </a><br><a href="/shuffled_sexual_net.csv"> Lab 3: Randomized sexual contact edgelist file </a><br><a href="/urban_net.csv"> Lab 3: Urban edgelist file </a><br><br><a href="http://networkx.lanl.gov/"> NetworkX website </a><br><a href="http://networkx.lanl.gov/_downloads/networkx_tutorial.pdf"> NetworkX tutorial (8 pages) </a><br><a href="http://networkx.lanl.gov/_downloads/networkx_reference.pdf"> NetworkX manual (331 pages) </a><br>
+</td>
+</tr>
+<tr>
+<td valign="top">
+            <h4>
+<a name="tuesday-session-4-330-500" class="anchor" href="#tuesday-session-4-330-500"><span class="octicon octicon-link"></span></a>Tuesday, Session 4 (3:30-5:00)</h4>
+        </td>
         <td valign="top">
-            <A href="/SISMID_Python_Lab4.pdf"> Lab 4: Python Handout </a><br>
-            <A href="/simple_percolation.py"> Lab 4: Simple percolation code (add network construction) </a><br>
-        </td></tr>
-    <tr> <td valign="top">
-            <h4>Wednesday, Session 2 (10:30-12:00)</h4>
-        </td>  
+            <a href="/SISMID_Python_Lab4.pdf"> Lab 4: Python Handout </a><br><a href="/simple_percolation.py"> Lab 4: Simple percolation code (add network construction) </a><br>
+</td>
+</tr>
+<tr>
+<td valign="top">
+            <h4>
+<a name="wednesday-session-2-1030-1200" class="anchor" href="#wednesday-session-2-1030-1200"><span class="octicon octicon-link"></span></a>Wednesday, Session 2 (10:30-12:00)</h4>
+        </td>
         <td valign="top">
-            <A href="/SISMID_Python_Lab5.pdf"> Lab 5: Python Handout </a><br>
-            <A href="/intervention_perc.py"> Lab 5: Intervention percolation code </a><br>
-            <A href="/urban_ages.csv"> Lab 5: Urban age data </a><br>
-            <A href="/random_vacc_perc.py"> Lab 5: Random vaccination solution </a><br>
-            <A href="/targeted_vacc_perc.py"> Lab 5: Targeted vaccination solution </a><br>
-            <A href="/random_social_dist_perc.py"> Lab 5: Random social distancing solution </a><br>
-      </td></tr>
-</table>
+            <a href="/SISMID_Python_Lab5.pdf"> Lab 5: Python Handout </a><br><a href="/intervention_perc.py"> Lab 5: Intervention percolation code </a><br><a href="/urban_ages.csv"> Lab 5: Urban age data </a><br><a href="/random_vacc_perc.py"> Lab 5: Random vaccination solution </a><br><a href="/targeted_vacc_perc.py"> Lab 5: Targeted vaccination solution </a><br><a href="/random_social_dist_perc.py"> Lab 5: Random social distancing solution </a><br>
+</td>
+</tr>
+</table><h2>
+<a name="software-downloads" class="anchor" href="#software-downloads"><span class="octicon octicon-link"></span></a>Software Downloads</h2>
 
-<h2>Software Downloads</h2>
-<table >
-    <tr> <td valign="top">
-        <h4>Windows</h4>
-   </td><td>
-    <A href="https://www.enthought.com/downloads/"> Download Enthought Canopy </a><br>
-    <A href="http://sourceforge.net/projects/epifire/files/Windows%20binaries/EpiFire_v2.80_Win_Setup.exe/download">Download EpiFire v2.80 for Windows</a><br>
-    </td></tr>
-
-    <tr> <td valign="top">
-        <h4>OS X</h4>
-   </td><td>
-    <A href="https://www.enthought.com/downloads/"> Download Enthought Canopy </a><br>
-    <A href="http://sourceforge.net/projects/epifire/files/Mac%20OS%20X%20binaries/EpiFire_v2.80_OSX_Setup.dmg/download">Download EpiFire v2.80 for Mac OS X</a><br>
-    </td></tr>
-
-    <tr> <td valign="top">
-        <h4>Linux</h4>
-    </td><td>
-        Install python and python-networkx from repository<br>
-        <A href="http://www.github.com/tjhladish/EpiFire"> EpiFire source code </a><br>
+<table>
+<tr>
+<td valign="top">
+        <h4>
+<a name="windows" class="anchor" href="#windows"><span class="octicon octicon-link"></span></a>Windows</h4>
+   </td>
+<td>
+    <a href="https://www.enthought.com/downloads/"> Download Enthought Canopy </a><br><a href="http://sourceforge.net/projects/epifire/files/Windows%20binaries/EpiFire_v2.80_Win_Setup.exe/download">Download EpiFire v2.80 for Windows</a><br>
+</td>
+</tr>
+<tr>
+<td valign="top">
+        <h4>
+<a name="os-x" class="anchor" href="#os-x"><span class="octicon octicon-link"></span></a>OS X</h4>
+   </td>
+<td>
+    <a href="https://www.enthought.com/downloads/"> Download Enthought Canopy </a><br><a href="http://sourceforge.net/projects/epifire/files/Mac%20OS%20X%20binaries/EpiFire_v2.80_OSX_Setup.dmg/download">Download EpiFire v2.80 for Mac OS X</a><br>
+</td>
+</tr>
+<tr>
+<td valign="top">
+        <h4>
+<a name="linux" class="anchor" href="#linux"><span class="octicon octicon-link"></span></a>Linux</h4>
+    </td>
+<td>
+        Install python and python-networkx from repository<br><a href="http://www.github.com/tjhladish/EpiFire"> EpiFire source code </a><br>
         Talk to me if you have questions<br>
-    </td></tr>
-</table>
+</td>
+</tr>
+</table><p></p>
+      </section>
+
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
     
- <script type="text/javascript+protovis"> 
-var w = 1000;
-    h = 600;
-    colors = pv.Colors.category19();
-
-var vis = new pv.Panel()
-    .width(w)
-    .height(h)
-    .fillStyle("rgba(255,255,255,0.5)")
-    .event("mousedown", pv.Behavior.pan())
-    .event("mousewheel", pv.Behavior.zoom());
-
-var force = vis.add(pv.Layout.Force)
-    .nodes(miserables.nodes)
-    .links(miserables.links);
-
-force.link.add(pv.Line);
-
-force.node.add(pv.Dot)
-    .size(function(d) (d.linkDegree + 4) * Math.pow(this.scale, -1.5))
-    .fillStyle(function(d) d.fix ? "brown" : colors(d.group))
-    .strokeStyle(function() this.fillStyle().darker())
-    .lineWidth(1)
-    .title(function(d) d.nodeName)
-    .event("mousedown", pv.Behavior.drag())
-    .event("drag", force);
-
-vis.transform(pv.Transform.identity.translate(-w/2, -h/2).scale(2));
-vis.render();
-
-    </script>
-
-</body>
-
+  </body>
 </html>
