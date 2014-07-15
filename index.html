@@ -135,18 +135,21 @@
 
 <h2>
 <a name="additional-networks" class="anchor" href="#additional-networks"><span class="octicon octicon-link"></span></a>Additional Networks</h2>
-
+<table>
+<tr>
 <a href="http://www-personal.umich.edu/~mejn/netdata/"> Mark Newman's network data page </a><br>
-This is a good resource for networks, although most are likely not epidemiologically relevant.
+<p>This is a good resource for networks from different sources, although most are likely not epidemiologically relevant.</p>
 
-GML files can be read in using NetworkX like this:
+<p>GML files can be read in using NetworkX like this:</p>
 <pre><code>
-  from networkx import *
-  mygraph = read_gml("graph_file.gml")
+from networkx import *
+  
+mygraph = read_gml('graph_file.gml')
 </code></pre>
-<hr>
+</tr><tr>
 <a href="http://vax.herokuapp.com/"> VAX! A game about epidemic prevention. </a>
-<hr>
+</tr>
+</table>
 <p></p>
 
     <!--[if !IE]><script>fixScale(document);</script><![endif]-->
