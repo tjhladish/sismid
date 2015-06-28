@@ -1,0 +1,500 @@
+\documentclass{article}
+\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
+\usepackage{fancyvrb}
+\DefineShortVerb{\|}
+
+\usepackage{titlesec}
+\titleformat{\section}[block] {\normalfont\bfseries\Large}{\fbox{\thesection}}{1em}{}
+\titlespacing{\section}{0pt}{*6}{*1}
+\titleformat{\subsection}[block] {\normalfont\bfseries\large}{\thesubsection}{1em}{}
+
+
+\begin{document}
+
+\title{SISMID Module 9\\Lab 2: Introduction to Python}
+\author{Thomas J. Hladish, Joel C. Miller and Lauren Ancel Meyers}
+\date{July 2014}
+\maketitle
+
+\section*{Why Python?}
+\begin{itemize}
+\item it's relatively easy to learn and very easy to read
+\item it can be applied to a broad range of programming tasks
+\item Python is popular, so there is a lot of support online
+\item it's named after Monty Python\textemdash Really.
+\end{itemize}
+
+These qualities (less so the last one) make Python good for rapidly transferring ideas into working programs.  When shouldn't you use Python?  When it
+isn't fast enough: C/C++, Java, and Fortran are orders of magnitude faster, although they require much more development time and expertise.
+
+\section*{Install Python}
+
+For this course, we will be using the Enthought Canopy Python distribution, available at\\
+
+\texttt{https://www.enthought.com/products/canopy/academic/}\\
+
+If you have an academic email address, please use it to download and install Canopy.
+While all of the necessary software we will be using is free, open source software, it can
+be tricky to get the libraries we need installed correctly. Enthought Canopy solves this problem 
+by providing a nice installer for a large number of major open source Python projects.
+
+If you do not have an academic email address or you happen to be using Linux, please talk to us,
+as there are alternatives to using Canopy.
+
+\section{Using IDLE and IPython}
+Python is somewhat unusual among major programming languages in that it can be used interactively.
+This means that you can write and execute Python code line-by-line, somewhat like you use a calculator to
+interactively do math: rather than write all the expressions beforehand and then
+hit ``RUN'', you type them as you go.  It is also possible to write an entire program in a text file and then
+run it, but we will start with an interactive environment.
+
+The interactive exercises that follow were written using Python's Interactive DeveLopment Environment (IDLE) but can be done using either IDLE or IPython.  The biggest difference, for our purposes, is that the IDLE prompt looks like ``|>>>|'' whereas the IPython prompt looks like ``|In [1]:|''. Navigate to your system's applications menu and click Enthought Canopy, then select ``Editor'' to begin.  You can immediately start typing expressions at the prompt, or even writing a (small, simple)
+program.  Type |2+5| and hit |<ENTER>|.
+
+\pagebreak
+Try these, but feel free to also make up your own.  Don't type
+``|>>>|''\textemdash that's just the IDLE shell prompt.
+\begin{Verbatim}
+>>> 30/5
+>>> 30/4
+>>> 30.0/4
+>>> 5*9
+>>> 2**4
+>>> 15-2**3
+>>> (15-2)**3
+>>> 2**10000
+>>> 1.9**100
+>>> x = 2; y = 3
+>>> x**y
+\end{Verbatim}
+
+Notice four things:
+\begin{itemize}
+ \item If you only use integers, Python will disregard the decimal portion throughout the calculation
+ \item Python has a specific order of operations, which you can change using parentheses
+ \item Python is comfortable with large numbers (very large for integers, up to
+about $10^{308}$ for floating-point numbers)
+ \item After assigning values to variables, you can use them as you would numbers
+\end{itemize}
+
+IDLE will also let you use built-in functions, and even define your own.  For
+now, let's look at a built-in function:
+
+\subsection{The \texttt{range(start, end, step)} function}
+You will find that you frequently need to loop through or store a sequence
+of numbers that are evenly spaced on the number line (such as all integers, all
+evens, all multiples of some arbitrary integer).  \texttt{range()} solves exactly this problem.  Some examples:
+
+\begin{Verbatim}
+>>> range(5)
+[0, 1, 2, 3, 4]
+>>> range(2,10)
+[2, 3, 4, 5, 6, 7, 8, 9]
+>>> range(5,-5, -1)
+[5, 4, 3, 2, 1, 0, -1, -2, -3, -4]
+>>> range(3,16,3)
+[3, 6, 9, 12, 15]
+\end{Verbatim}
+
+Try to come up with solutions to these:
+\begin{itemize}
+ \item Generate the sequence of all odd numbers between 0 and 100 (e.g. 1, 3, 5,
+... , 99)
+ \item Generate the sequence of all even numbers from 100 to 0 (e.g. 100, 98,
+96, ... , 0)
+\end{itemize}
+
+Functions in Python are always invoked using the function name, followed by parentheses.  Depending on the function, you may need to specify
+function inputs, called \textit{arguments}, inside the parentheses.  The value you get back after the function executes is
+called the \textit{return value}.  In the case of |range()|, the return value is actually a list.
+
+Just as you can store single values in a variable, you can store lists:
+
+\begin{Verbatim}
+>>> x = range(2,7)
+>>> x
+[2, 3, 4, 5, 6]
+>>> x[0]
+2
+\end{Verbatim}
+
+In this case, |x| holds a list, and we can access individual elements of a list
+using the syntax |x[i]|, equivalent to $\textbf{x}_{i}$ in standard mathematical
+notation.  \textbf{Notice that list indexing starts with zero!}  This is a very
+important point, and is the source of many programming bugs.  Similarly, the
+index of the last element of a list is one less than the length of the list.
+
+Note that \texttt{range()} can take, one, two or three arguments.  If you leave
+off the \textit{step} argument, \texttt{range()} assumes a default of
+\texttt{1}.  \textbf{Also,} \texttt{range(start, end)} \textbf{uses the interval
+[start, end), so the end point is never included in the list.}
+
+\subsection{Browse command history with CONTROL-p, ALT-p, or UP/DOWN keys}
+If you get sick of retyping very similar commands, you can bring up recently
+typed commands using |CONTROL-p|, |ALT-p|, or the UP arrow key.  Unfortunately,
+this is system-specific, so if one doesn't work, try another.  |CONTROL-n|/|ALT-n|/DOWN will move
+forward in the command history.
+
+\subsection{Help!}
+You can also use IDLE to find out how to use a certain function (although I
+usually use Google for this, e.g. searching for ``python range'').  Try entering
+|help(range)|.
+
+\section{Example: Hello World}
+We can only get so far using an interactive environment.  The Python shell is
+best suited for very small tasks that you just need to do once.  Instead,
+programming is normally done by writing a text file, saving it, and then
+executing or running it.
+
+Most programming tutorials start the same way, by creating a program that
+produces the text ``Hello, World!''.  With IDLE running, go to File\textgreater
+New\textgreater Python file to start a new document.  Type the following text in the new document
+window (without the line numbers!):
+
+\begin{Verbatim}[numbers=left]
+#!/usr/bin/python
+print "Hello, World!"
+\end{Verbatim}
+
+Then save it as a file named |hello_world.py|.  The exact name isn't important,
+only that it ends in ``.py'' and is somewhat descriptive.  Also, it's best to
+avoid spaces inside file names\textemdash use an underscore (``\_'') instead.
+
+Now you can run your program by going to Run\textgreater Run Module.  You should
+see the text |Hello, World!| appear in the terminal.
+
+The second line is probably self-explanatory, but what's going on with the first
+line?  In Unix-based systems (linux and OS X), Line 1 tells the operating system
+what to do with the stuff that follows\textemdash namely, use Python to
+interpret it.  Windows, on the other hand, ignores Line 1, and instead
+recognizes files by extension, in this case \texttt{.py}.  In order to make it
+possible to run your code on other systems, follow the conventions for both
+Windows and Unix.  This is not necessary in every instance, but it's a good
+habit that may save you trouble later; it also visually distinguishes a program from an arbitrary chunk of code in a file.
+
+\section{Example: Averaging two numbers}
+
+Let's do something slightly more complicated.  Many programs need to get some
+kind of input from a user; here we will ask the user to provide two numbers,
+which we will then average.
+
+\begin{Verbatim}[numbers=left]
+#!/usr/bin/python
+
+# Normally we could do something like this:
+# num1, num2 = input("Enter two numbers separated by a comma: ")
+
+# There's a bug affecting input() in the console Canopy uses, however.
+# Here is a workaround:
+input_string = raw_input("Enter two numbers separated by a comma: ")
+num1, num2 = input_string.split(',')  # split into separate strings
+num1, num2 = float(num1), float(num2) # convert the strings into numbers
+
+average = (num1 + num2) / 2.0
+print "The average is:", average
+\end{Verbatim}
+
+\subsection{Variables and Assignment}
+There are a number of things going on in Line 4.  First, a single equals sign
+(\texttt{=}) means \textit{assignment}\textemdash in other words, evaluate the
+thing on the right-hand side (\textbf{RHS}), and store it in the variable(s) on
+the left-hand side (\textbf{LHS}).  Programming deviates from math in that the
+RHS is always evaluated first\textemdash so it's perfectly legit to say
+
+\begin{Verbatim}
+ x = x + 1
+\end{Verbatim}
+
+ assuming x is a number (the value of |x| increases by one).
+
+In this case, the |input()| command is returning two values on the RHS, so the
+first one gets stored in the first variable on the LHS, and the second one in
+the second variable.  Line 9 works similarly.
+
+\subsection{input() and raw_input()}
+Python makes getting user input extremely easy compared to most languages.  As
+you can see, you type something in quotes that will be displayed to the user,
+and whatever the user enters is the return value of |input()|.  Note that it's
+important for the user to behave as expected\textemdash if |input()| gets
+something other than two numbers separated by a comma, the program will fail.
+
+|raw_input()| is similar to |input()|, except that Python does not try to process what
+the user has entered; instead, the input is stored as a single string.  Instead of the
+three-line workaround in the example, we could have used |eval(raw_input('...'))|.  It
+has the same behavior as |input()|, but we went with a more explicit, less magical option.
+
+\section{Example: Reading in a stored network}
+\label{stored_net}
+I will provide you with an edgelist file (|simple_edges.txt|) that contains data that looks something
+like this:
+
+\begin{Verbatim}
+0 15                          
+0 5                           
+0 14                          
+0 7                           
+1 9                           
+1 2                           
+1 10                          
+[and so on]
+\end{Verbatim}
+
+Each line in this file represents an edge in a network with 20 nodes.  The two integers on
+each line are the node numbers (unique identifiers); in other words, looking at the first four lines, we can see that Node 0 is
+connected to Nodes 15, 5, 14, and 7.  To keep things simple, let's assume this is an
+undirected network, so saying there is an edge going from Node 0 to Node 15 is
+the same as saying there is an edge going from Node 15 to Node 0.
+
+For now, let's just read in the file and write it out to the terminal.  I've added some comments (bits of text that
+aren't executed) to this program to help explain how it works. Comments in Python are denoted using ``|#|''.
+
+\begin{Verbatim}[numbers=left, samepage=true]
+#!/usr/bin/python
+
+file_in = open('simple_edges.txt') # let Python know you will want to access the file
+
+for edge in file_in:        # loop through the file, storing each line in turn in 'edge'
+    print edge              # print each line in turn, to make sure everything's working
+
+file_in.close()             # Tell Python you no longer need access
+\end{Verbatim}
+This program looks very simple, but it presents some important concepts.
+
+\subsection{\texttt{for} loops}
+Computers excel at mind-numbingly repetitive tasks.  By using loops, we can make the computer do very similar tasks an indefinite number of times 
+with (presumably) different input each time.  In this case, what's changing is the edge; later we'll replace the |print| statement 
+with more interesting code.  The general syntax of a |for| statement is\\
+
+\noindent \texttt{for} \textit{temp\_variable} \texttt{in} \textit{list\_variable}:\\
+\indent \textit{block of code to execute each time}\\
+
+Since file variables are not technically lists, reading in a file in this way is something of a convenient idiom in Python.
+
+\subsection{Indentation}
+\textbf{Indentation in Python is very important.}  In many languages, different
+blocks of code are set apart using special characters, often curly brackets.  In
+Python, you are inside of a \texttt{for} loop as long as each line is indented the
+same amount.  Just how much doesn't matter\textemdash it could be one space, it
+could be 18; what matters is that you are consistent within that block of code.
+
+\section{Example: Converting file types}
+Let's spend a bit more time looking at how to get data in and out of our programs, since this is such a fundamental part of doing research.
+It is possible to directly access and manage databases from within Python, but for now we will focus on the more ubiquitous task of working with files.
+
+As demonstrated in Example~\ref{stored_net}, to work with a file within a Python program, we create a file variable using \texttt{open()}.  The
+file variable type is much more abstract than the variable types up to now (it's not a number or text string or anything else we've looked at),
+ but it's very easy to use.
+
+\subsection{Use \texttt{file.write}(\textit{string}) to write to a file}
+Python is a great language for handling tasks like changing a file format.  In this example, we will convert the original space-delimited edge file
+to a comma-delimited file called ``simple\_edges.csv'' (``csv'' stands for ``comma separated values'').  To create an output file, we still
+use the |open()| function, but this time we add a second argument: |"w"|.  This
+time we'll name the file variable |file_out| to make it clear that it's a file variable opened for output.
+
+\begin{Verbatim}[numbers=left, samepage=true]
+#!/usr/bin/python
+
+file_in = open('simple_edges.txt')         # Input file
+file_out = open('simple_edges.csv', 'w')   # "w" is for write--be careful, since
+                                           # this can overwrite an existing file!
+
+for edge in file_in:                 # Same as before
+    node1, node2 = edge.split(' ')   # Split the line on spaces
+    csv_edge = node1 + ',' + node2   # Concatenate the parts together, comma-separated
+    file_out.write(csv_edge)         # Write the line to file_out
+
+file_in.close()       # Closing an input file isn't usually important
+file_out.close()      # Closing output files is!  Otherwise you may lose data
+\end{Verbatim}
+
+On Line 8, I used the \textit{string}|.split()| function.  The syntax might seem odd at this point, since the variable to be split goes in front 
+of the function name instead of inside of the parentheses, but otherwise it's as simple as it looks: if |line| consists of text separated
+ by spaces, |split()| will break that string into ``words'' (numbers, in this case), discarding the space, and in this case the newline (the ``return'' character) as well.
+
+On Line 9, we concatenate three strings together; we will look at this and similar operations in Section~\ref{str_add}.
+
+\section{Example: Evens and Odds}
+
+In this example, we will look at a program that generates a list of integers,
+and then identifies whether they are even or odd.
+
+\begin{Verbatim}[numbers=left, samepage=true]
+#!/usr/bin/python
+
+for num in range(10):        # loop through [0, 1, ..., 8, 9], storing each number in "num"
+    if num % 2 == 0:         # check to see if num modulo 2 (the remainder) is zero
+        print "Even:", num   # if so, label it as an even number
+    else:                    # in all other cases
+        print "Odd:", num    # label it as odd
+\end{Verbatim}
+
+Here again we see the |for| loop, this time looping through the elements of a list, rather than the lines of a file.  Just as indentation denotes that you 
+are inside a |for| loop, the same holds true for \texttt{if} statements.  In this case, the \texttt{print} statement on Line 5 is nested inside 
+the \texttt{if} block starting on Line 4, which is nested inside the \texttt{for} loop starting on Line 3.
+
+\subsubsection*{Assignment and Equality}
+We've already seen how a single equals sign (\texttt{=}) means assignment; here
+we see that two equals signs (\texttt{==}) means an \textit{equality test}, or
+``Are these two things equivalent?''  The opposite of (\texttt{==}) is
+(\texttt{!=}), read ``does not equal''.  Take a moment and explore this in IDLE.
+ Try some of these:
+
+\begin{Verbatim}
+>>> 5 == 6-1
+>>> 5 == 6-2
+>>> 5 != 6
+>>> x=2; x == 2
+>>> x == 3
+>>> True == (x==2)
+>>> False == (3==x)
+\end{Verbatim}
+
+\subsubsection*{Conditionals}
+The \texttt{if ... else} here is an example of a control structure that uses a \textit{conditional}, in this case whether \texttt{num} is divisible by
+2.  \texttt{if ... else} constructions are what you need whenever you want to execute different code, depending on whether something is true (that's the
+\textit{conditional} statement).
+
+\section{Example: Determining degree sequence and distribution}
+\label{deg_seq}
+In the next lab, we will look at how to use NetworkX to do network-based calculations and simulations.  Using the Python we have discussed so far,
+however, we can already determine the degree sequence, and therefore the degree distribution for a network.\footnote{Remember that a node's \textit{degree}
+ is the number of edges connecting it to other nodes; a network's \textit{degree distribution} is therefore the distribution of these values for
+ all nodes in the network.}
+
+We can represent the degree sequence as a list; all we have to do is count the edges for each node.  Since the node names in |simple_edges.txt| are 
+consecutive integers from 0 to 19, we can use the node names as list indices.  Each position in the list will then contain the number of edges 
+connected to that node/index.
+
+There is one caveat: even though \textit{we} know that the node names are integers, Python assumes everything read in from a file is text\textemdash so we
+have to explicitly say that they are integers (see Line 10 below).
+
+\begin{Verbatim}[numbers=left, samepage=true]
+#!/usr/bin/python
+
+file_in = open('simple_edges.txt')
+
+net_size = 20                        # I know that the file will have 20 nodes
+deg_seq  = [0] * net_size            # Create a list of 20 zeros using list multiplication
+
+for edge in file_in:
+    node1, node2 = edge.strip().split(' ')    # Remove the newline, then split on spaces
+    node1, node2 = int(node1), int(node2)     # Convert the names to integers
+    deg_seq[node1] = deg_seq[node1] + 1       # Increment the edge count for node 1
+    deg_seq[node2] = deg_seq[node2] + 1       # and node 2
+
+print deg_seq                        # Let's look at what we've got
+file_in.close()
+\end{Verbatim}
+
+\subsection{String and list addition and multiplication}
+\label{str_add}
+On Line 6, we see an example of list multiplication.  Addition, or more properly \textit{concatenation} is also defined for lists.  Since these
+operations work in the same way for strings, here are examples of that as well:
+
+\begin{Verbatim}[samepage=true]
+>>> 'abc' + 'de'          # string concatenation
+'abcde'
+>>> 'abc' * 3             # string multiplication
+'abcabcabc'
+>>> [0, 1] + [2, 3, 4]    # list addition
+[0, 1, 2, 3, 4]
+>>> [0, 1] * 4            # list multiplication
+[0, 1, 0, 1, 0, 1, 0, 1]
+\end{Verbatim}
+
+\subsection{Variable types and type conversions}
+So far, we've used three types of single-value variables: integers, floating-point numbers, and strings.  Others do exist, but you will rarely need to
+use them.  In the following example, we create one variable of each of these types.
+
+\begin{Verbatim}[samepage=true]
+>>> a = 3
+>>> b = 3.14159
+>>> c = '3.14'
+>>> a, b, c
+(3, 3.14159, '3.14')
+\end{Verbatim}
+
+Python automatically recognizes that \textbf{a} is an int, \textbf{b} is a float, and \textbf{c} is a string.  Note that integers are stored precisely,
+floats are stored approximately, and strings are quoted.
+
+Sometimes it is necessary to convert from one type to another, for example when we have integers but we are doing normal division, or as in Section~\ref{deg_seq}
+where we needed strings to be treated as integers.  As long as the input is sensible, you can convert from any type to any other type:
+
+\begin{Verbatim}[samepage=true]
+>>> float(a), float(c)
+(3.0, 3.14)
+>>> str(a), str(b)
+('3', '3.14159')
+>>> int(b), int(float(c))  # int(c) doesn't work, because 2 conversions are needed
+(3, 3)
+\end{Verbatim}
+
+\subsection{Visualizing the degree distribution}
+If your degree sequence program is correct, you should have gotten the following output in the terminal:
+
+\begin{Verbatim}
+[4, 4, 3, 7, 2, 4, 4, 4, 3, 5, 3, 6, 8, 4, 5, 5, 3, 1, 4, 5]
+\end{Verbatim}
+
+In order to visualize that list as a histogram, we can use the |hist()| and |show()| functions in the |pylab| library.  Add the following lines to 
+the end of your degree sequence program from above:
+
+\begin{Verbatim}[numbers=left, samepage=true]
+# ... code from degree sequence program ...
+
+from pylab import hist, show        # import these two functions from the pylab library
+hist(deg_seq, bins=8, range=(1,9))  # hist(deg_seq) will work, but not look very good
+show()                              # open a new window to display the plot
+\end{Verbatim}
+
+The network is small, of course, but you probably noticed that the distribution is roughly bell-shaped.  This network was generated using the
+Erd\H{o}s-R\'{e}nyi algorithm, so the underlying distribution is poisson.
+
+\section*{Additional exercises}
+\begin{enumerate}
+
+ \item Write a program to calculate the volume and surface area of a sphere from
+its radius.  Ask the user for the radius using |input()|.  Use the following
+formulas:
+$\\V = \frac{4}{3} \pi r^{3}$
+$\\A = 4 \pi r^{2}\\$
+You can approximate $\pi$ as 3.1415926, and in Python, $2^{3}$ is written
+|2**3|.
+
+ \item Write a program that calculates the squares of the first $n$ natural
+numbers (1, 2, 3, 4, ...), where $n$ is provided by the user.  Use the |input()|
+function for this.
+
+ \item Write a program that prompts the user for two numbers, and reports whether
+the second number is a factor of the first.
+
+ \item Write a program to sum a series of numbers entered by the user.  The
+program should first prompt the user for how many numbers are to be summed.  It
+should then input each of the numbers and print a total sum.
+
+\item Write a program that will determine, for each integer between 1 and 100,
+whether that number is prime.  Print the output for the user.  Can you make it
+faster?
+
+\end{enumerate}
+
+
+\section*{Other resources}
+You will find that Google is enormously helpful in learning Python.  Try
+some of these resources I found:
+
+\noindent Online:
+\begin{itemize}
+ \item |http://wiki.python.org|
+ \item |https://developers.google.com/edu/python/|
+ \item |http://anh.cs.luc.edu/python/hands-on/handsonHtml/handson.html|
+\end{itemize}
+
+\noindent Books:\\
+Python web resources are so good that you may not need a book.  If you're interested, however, I highly recommend 
+\textbf{Python Programming: An Introduction to Computer Science} by John M. Zelle, 
+although it is weighted more heavily toward teaching computer science than
+ a Python reference \textit{per se}.  Also consider \textbf{The Quick Python Book} by Naomi R. Ceder, \textbf{Python Essential Reference} by David M. Beazley, and \textbf{Python Scripting for Computational Science} by Hans Petter Langtangen.
+
+
+\end{document}
