@@ -4,6 +4,7 @@
 \usepackage{multirow}
 \usepackage{graphicx}
 \DefineShortVerb{\|}
+\pagenumbering{gobble}
 
 \usepackage{titlesec}
 \titleformat{\section}[block] {\normalfont\bfseries\Large}{\fbox{\thesection}}{1em}{}
@@ -15,7 +16,7 @@
 
 \title{SISMID Module 9\\Lab 3: Modeling networks in Python}
 \author{Thomas J. Hladish, Joel C. Miller and Lauren Ancel Meyers}
-\date{July 2014}
+\date{July 2015}
 \maketitle
 
 
@@ -76,7 +77,7 @@ but for now, let's start with an example.  Consider the following small network:
 \end{center}
 \end{figure}
 
-Let's reconstruct this toy network.  Open up IDLE, and begin typing the following lines (ignore any warnings about the ``sets module'', and you can leave off the comments, of course):
+Let's reconstruct this toy network.  Open up IDLE/IPython, and begin typing the following lines (ignore any warnings about the ``sets module'', and you can leave off the comments, of course):
 
 \begin{Verbatim}[samepage=true]
 >>> from networkx import *       # import ALL of the functions available in NetworkX
@@ -88,7 +89,7 @@ Let's reconstruct this toy network.  Open up IDLE, and begin typing the followin
 >>> # Continue adding the other three edges in the toy network diagram
 \end{Verbatim}
 
-When you think you have all of the edges added, take a look at your network by entering the code below.  Just like in the exercise at the end of the last lab, we need to use the |show()| function in the |pylab| library to handle opening a new window on the screen.  As an aside, you generally only need to import functions once per IDLE session or once per program\textemdash they remain accessible as long as the same program is still running.
+When you think you have all of the edges added, take a look at your network by entering the code below.  Just like in the exercise at the end of the last lab, you may need to use the |show()| function in the |pylab| library to handle opening a new window on the screen.
 
 \begin{Verbatim}[samepage=true]
 >>> from pylab import show       # import show() from pylab
@@ -122,16 +123,14 @@ Most of the time you will not want to be building and editing graphs by hand.  O
 \begin{Verbatim}[numbers = left, samepage=true]
 #!/usr/bin/python
 from networkx import *
-from pylab import show
 
 G = Graph()
 
 #
-# insert code here to add all the "toy network" edges
+# insert code here to add all of the "toy network" edges
 #
 
 draw(G)
-show()
 \end{Verbatim}
 
 Now you can run your program by pressing the |F5| key or by going to Run\textgreater Run Module.  If your program doesn't work and you get error

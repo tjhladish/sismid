@@ -5,7 +5,7 @@
 \usepackage{graphicx}
 \usepackage{enumerate}
 \DefineShortVerb{\|}
-
+\pagenumbering{gobble}
 
 \usepackage{relsize}
 \usepackage{lipsum}
@@ -31,7 +31,7 @@
 
 \title{SISMID Module 9\\Lab 1: EpiFire Tutorial}
 \author{Thomas J. Hladish and Joel C. Miller}
-\date{July 2014}
+\date{July 2015}
 \maketitle
 
 
@@ -165,7 +165,7 @@ Time step units & simulation steps & infectious period units \\
 \DefineShortVerb{\|}
 
 \subsubsection{Infectious period (chain binomial only) and transmissibility}
-This parameter is the length of time that individuals will remain infectious.  It is numerically equal to the maximum number of times an edge between an infectious and susceptible pair of individuals is tested for transmission.  If a given pathogen has an infectious period of 1 week, that can be expressed as 1 (week), 7 (days), 168 (hours), etc.; the transmissibility (per time\textendash step probability of transmission) must be adjusted accordingly, and whatever units you use are the units of the epidemic curve horizontal axis.  The conversion is as follows:
+The infectious period parameter is the length of time that individuals will remain infectious.  It is numerically equal to the maximum number of times an edge between an infectious and susceptible pair of individuals is tested for transmission.  If a given pathogen has an infectious period of 1 week, that can be expressed as 1 (week), 7 (days), 168 (hours), etc.; the transmissibility (per time\textendash step probability of transmission) must be adjusted accordingly, and whatever units you use are the units of the epidemic curve horizontal axis.  The conversion is as follows:
 
 \vspace{15 pt}
 
@@ -205,8 +205,8 @@ Now that you have selected a network and a simulation, this is where the buttons
 Button & Function \\ \hline
 Clear Network & Delete the network in memory\\ 
 Clear Data & Delete all generated data\\ 
-Default Settings & Return parameters to default values\\ 
 Analyze network & See section 2.6\\ 
+Draw network & Render the network as image ( $< 10^4$ nodes; $< 10^3$ recommended)\\
 Generate network & Generate a new network, replacing any previous network\\ 
 Import Edge List & Open file dialog to import a network from a CSV file\\ 
 Run Simulation & Conduct the specified simulation on the network in memory\\ 
@@ -303,6 +303,8 @@ A node's degree is the number of edges it has; by counting the number of nodes h
 \subsection{Explore}
 Before we start doing real exercises, take a look around.  Click ``Generate Network,'' then click ``Run Simulation'' a few times.  Try changing some parameters, and see what effect they have.  Remember, if you want to clear the plots, click ``Clear data,'' and if you want to do a bunch of simulations quickly, try changing the simulation type to ``Percolation,'' and change the number of runs to a bigger number.
 
+You can also use "Draw network" to visualize some smaller networks (probably $<10^3$ nodes, depending on your computer) and simulations.  Mouse scrolling or +/- will zoom in/out, holding ENTER or RETURN causes the layout optimization algorithm to continue running, and you can drag around with your mouse.  You can drag multiple nodes by drawing a box around them first with your mouse.
+
 \subsection{Poisson vs power law}
 Let's investigate the effects of having a more homogeneous degree distribution (Poisson), versus a more heterogeneous one (power law).  For this exercise, switch the simulation type to ``percolation,'' since we will only be looking at final epidemic size; this will speed things up.
 
@@ -326,17 +328,17 @@ Let's find a Poisson-distributed network that has the same (or very similar) R-z
 
  \item In this exercise, we have kept the expected R-zero the same; this means that the critical transmissibility for the two networks is the same.  What does R-zero tell you?  What \textit{doesn't} it tell you?  When parameterized to have the same critical transmissibility, are epidemics bigger on a homogeneous or a heterogeneous network?
 
- \item Which is a better approximation of a classical mass-action model, and why?
+ \item Which is a better approximation of a classical mass-action model, and why?  By modifying the degree distribution and network size, we can still do better than these networks if we are trying to approximate, for example, a classical S-I-R model.  What should those changes be?
 \end{itemize}
 
 \subsection{Is the urban network a good model for influenza?}
 Meyers \textit{et al.} (2005) created the urban network model with SARS in mind, but other respiratory diseases like influenza likely have similar modes of transmission.  Since the same contacts between people are important, it is reasonable to think that the underlying network structure will be similar. Let's see whether that seems to be the case.
 
-Select ``Urban'' from the degree distribution menu, and generate a network of 10,000 nodes.  Select ``percolation'' as the simulation type, and change the transmissibility value until the expected R-zero is approximately 1.2.  This is an appropriate value of R-zero for seasonal (non-pandemic) influenza.
+Select ``Urban'' from the degree distribution menu, and generate a network of 10,000 nodes.  Select ``percolation'' as the simulation type, and change the transmissibility value until the expected R-zero is approximately 1.1.  This is an appropriate value of $R_e$ (the effective reproduction number) for seasonal (non-pandemic) influenza.\footnote{Strictly speaking, $R_0$ is the reproduction number for fully susceptible populations, but seasonal influenza does not circulate on fully susceptible populations because many people have some immunity from natural infection and from vaccination.  The reproduction number we observe, $R_e$, is from an epidemic spreading on a more complicated network than what are modeling here, one where transmissibilities depend on immune state.}
 
 Now, how will we determine if this is a good network to use for influenza?  As you saw in the last exercise, using a particular R-zero value is no guarantee that epidemics will occur with a certain probability, or be of a certain size.  In a typical year 5-15\% of the United States becomes infected each year with influenza.  Remember, that is averaging urban and rural areas, and populations that did not experience an epidemic with those that did, so the average for a city is likely to be somewhat higher.
 \begin{itemize}
- \item Do 100 simulation runs with the transmissibility value you chose.  How big are the epidemics that occur?
+ \item Do 1000 simulation runs with the transmissibility value you chose.  How big are the epidemics that occur?
 
  \item How frequently do epidemics occur?
 \end{itemize}
@@ -345,7 +347,31 @@ The frequency of these epidemics is a problem: real urban populations experience
 
 Think about why changing the initial number of infected individuals has this effect.  What is the effect when the network is a single component?  What about when the network has many components, perhaps one giant component and many small ones?
 
-Finally, try a similar process with other degree distributions.  Are there others that can reproduce reasonable epidemics, given an R-zero value of 1.2?
+Finally, try a similar process with other degree distributions.  Are there others that can reproduce reasonable epidemics, given an R-zero value of 1.1?
+
+
+\subsection{Identifying epidemics}
+We all have some notion of what we mean by the word \textit{epidemic}, but a precise definition that applies across all areas of epidemiology is not possible.  In stochastic network models, epidemics might fail to occur when they are likely, and if a highly-connected individual is infected early on, a large number of people might become infected even if the expected R-zero is less than 1.
+
+Practically speaking, if 8 people become infected in a population of 10,000, we would not call that an epidemic.  If 80\% of those 10,000 people become infected, that is definitely an epidemic.  What if it is 8 people, or 80\% of a population of just 10?  The way we think about epidemics is somehow connected to population size.
+
+\begin{itemize}
+  \item Generate a 100-node network using the urban degree distribution, and select a percolation simulation with transmissibility = 0.07.  Run 1,000 (or more) simulations.  What fraction of simulations would you say resulted in an epidemic? Click "Simulation results analysis" in the Results menu to open the results analysis dialog.  Make note of the mean number infected in all simulations.  If you would say that some epidemics occurred, adjust the outbreak/epidemic threshold accordingly, and make note of mean number infected in outbreaks and in epidemics, respectively.
+  
+  \item Click "Clear data" in the main application window to remove these results, and repeat the exercise for a 1,000-node network, keeping all other settings the same.  What fraction of simulations resulted in an epidemic?  You should have observed some epidemics: adjust the outbreak/epidemic threshold if necessary, and make note of mean number infected in outbreaks and in epidemics.  Calculate the mean fraction infected in epidemics and write it down.
+
+  \item Click "Clear data" in the main application window to remove these results, and repeat the exercise one more time for a 10,000-node network.  What was the mean number infected in outbreaks, and the mean fraction infected in epidemics?
+  
+  \item What generalizations can you make about how changing population size affects:
+  \begin{itemize}
+    \item The number of people and fraction of population infected in an outbreak (non-epidemic)?
+    \item The number of people and fraction of population infected in an epidemic?
+  \end{itemize}
+  
+  \item Let's look at one more scenario: clear the data, and generate a new 1,000-node network, but this time change the transmissibility to 0.05 and the number initially infected to 50.  What is the expected R-zero?  Should epidemics be possible?  Run 1,000 simulations.  How does the mean number and fraction infected compare to the runs with the 1,000-node network and a higher transmissibility?  Having multiple introductions, each producing an "outbreak" can make it difficult to say what we would call an epidemic.  A theorist might say no epidemics occurred, while a public health official might say epidemics always occurred.  If you repeat this exercise with a large population, however, you should find that the number infected does not increase proportionally.
+\end{itemize}
+
+Using analytical methods from network epidemiology, we can sometimes calculate the expected final size for an infinite population, and that may provide some guidance when choosing what to call an epidemic in a stochastic setting.  If it is unclear from examining results what should be called an epidemic, it may help to vary the population size to see how dynamics changed.
 
 
 \subsection{What drives stochasticity?}
@@ -353,7 +379,7 @@ Stochasticity is an important topic in epidemiology, in large part because of ou
 
 Let's examine some stochastic phenomena in EpiFire.
 \begin{itemize}
- \item Click ``Default settings'' and ``Clear data.''  Generate the default network, and Poisson(5) network with 10,000 nodes.
+ \item Click ``Default settings'' and ``Clear data.''  Generate the default network, a Poisson(5) network with 10,000 nodes.
  \item Click ``Run simulation'' several times.
 \end{itemize}
 

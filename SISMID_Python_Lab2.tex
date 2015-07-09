@@ -2,6 +2,7 @@
 \usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
 \usepackage{fancyvrb}
 \DefineShortVerb{\|}
+\pagenumbering{gobble}
 
 \usepackage{titlesec}
 \titleformat{\section}[block] {\normalfont\bfseries\Large}{\fbox{\thesection}}{1em}{}
@@ -13,7 +14,7 @@
 
 \title{SISMID Module 9\\Lab 2: Introduction to Python}
 \author{Thomas J. Hladish, Joel C. Miller and Lauren Ancel Meyers}
-\date{July 2014}
+\date{July 2015}
 \maketitle
 
 \section*{Why Python?}
@@ -29,29 +30,28 @@ isn't fast enough: C/C++, Java, and Fortran are orders of magnitude faster, alth
 
 \section*{Install Python}
 
-For this course, we will be using the Enthought Canopy Python distribution, available at\\
+For this course, we will be using the Enthought Canopy Express, available for free here:\\
+
+\texttt{https://store.enthought.com/\#canopy-individual}\\
+
+If you have an academic user, you can download the full version for free here:\\
 
 \texttt{https://www.enthought.com/products/canopy/academic/}\\
 
-If you have an academic email address, please use it to download and install Canopy.
-While all of the necessary software we will be using is free, open source software, it can
-be tricky to get the libraries we need installed correctly. Enthought Canopy solves this problem 
-by providing a nice installer for a large number of major open source Python projects.
+\noindent
+although Canopy Express now has all of the libraries we need.  While all of the necessary software we will be using is free, open-source software, it can be tricky to get the libraries we need installed correctly on a class full of computers. Enthought Canopy solves this problem by providing a nice installer for a large number of major open source Python projects.
 
-If you do not have an academic email address or you happen to be using Linux, please talk to us,
-as there are alternatives to using Canopy.
+If you happen to be using Linux, you can use the linux installer for Enthought Canopy, or you can install everything you need from your distribution's repositories, which may be a cleaner solution.  If you have any questions, please talk to us, and we can get you set up.
 
 \section{Using IDLE and IPython}
 Python is somewhat unusual among major programming languages in that it can be used interactively.
 This means that you can write and execute Python code line-by-line, somewhat like you use a calculator to
 interactively do math: rather than write all the expressions beforehand and then
-hit ``RUN'', you type them as you go.  It is also possible to write an entire program in a text file and then
-run it, but we will start with an interactive environment.
+hit ``RUN'', you type them as you go.  It is also possible to write an entire program in a text file and then run it, but we will start with an interactive environment.
 
-The interactive exercises that follow were written using Python's Interactive DeveLopment Environment (IDLE) but can be done using either IDLE or IPython.  The biggest difference, for our purposes, is that the IDLE prompt looks like ``|>>>|'' whereas the IPython prompt looks like ``|In [1]:|''. Navigate to your system's applications menu and click Enthought Canopy, then select ``Editor'' to begin.  You can immediately start typing expressions at the prompt, or even writing a (small, simple)
+The interactive exercises that follow were written using Python's Interactive DeveLopment Environment (IDLE) but can be done using either IDLE or IPython.  The most obvious difference is that the IDLE prompt looks like ``|>>>|'' whereas the IPython prompt looks like ``|In [1]:|''. Navigate to your system's applications menu and click Enthought Canopy, then select ``Editor'' to begin.  You can immediately start typing expressions at the prompt, or even writing a (small, simple)
 program.  Type |2+5| and hit |<ENTER>|.
 
-\pagebreak
 Try these, but feel free to also make up your own.  Don't type
 ``|>>>|''\textemdash that's just the IDLE shell prompt.
 \begin{Verbatim}
@@ -108,6 +108,8 @@ Functions in Python are always invoked using the function name, followed by pare
 function inputs, called \textit{arguments}, inside the parentheses.  The value you get back after the function executes is
 called the \textit{return value}.  In the case of |range()|, the return value is actually a list.
 
+\pagebreak
+
 Just as you can store single values in a variable, you can store lists:
 
 \begin{Verbatim}
@@ -136,9 +138,7 @@ this is system-specific, so if one doesn't work, try another.  |CONTROL-n|/|ALT-
 forward in the command history.
 
 \subsection{Help!}
-You can also use IDLE to find out how to use a certain function (although I
-usually use Google for this, e.g. searching for ``python range'').  Try entering
-|help(range)|.
+You can also use the Python interpreter to find out how to use a certain function (although Google may be useful for finding examples\textemdash just serach for "python" and the function name).  Try entering |help(range)|.
 
 \section{Example: Hello World}
 We can only get so far using an interactive environment.  The Python shell is
@@ -147,7 +147,7 @@ programming is normally done by writing a text file, saving it, and then
 executing or running it.
 
 Most programming tutorials start the same way, by creating a program that
-produces the text ``Hello, World!''.  With IDLE running, go to File\textgreater
+produces the text ``Hello, World!''.  With Canopy running, go to File\textgreater
 New\textgreater Python file to start a new document.  Type the following text in the new document
 window (without the line numbers!):
 
@@ -157,10 +157,10 @@ print "Hello, World!"
 \end{Verbatim}
 
 Then save it as a file named |hello_world.py|.  The exact name isn't important,
-only that it ends in ``.py'' and is somewhat descriptive.  Also, it's best to
+only that it ends in ``.py'' and is somewhat descriptive.  Also, it's a good practice to
 avoid spaces inside file names\textemdash use an underscore (``\_'') instead.
 
-Now you can run your program by going to Run\textgreater Run Module.  You should
+Now you can run your program by going to Run\textgreater Run File or pressing |CONTROL-r|.  You should
 see the text |Hello, World!| appear in the terminal.
 
 The second line is probably self-explanatory, but what's going on with the first
@@ -182,13 +182,7 @@ which we will then average.
 #!/usr/bin/python
 
 # Normally we could do something like this:
-# num1, num2 = input("Enter two numbers separated by a comma: ")
-
-# There's a bug affecting input() in the console Canopy uses, however.
-# Here is a workaround:
-input_string = raw_input("Enter two numbers separated by a comma: ")
-num1, num2 = input_string.split(',')  # split into separate strings
-num1, num2 = float(num1), float(num2) # convert the strings into numbers
+num1, num2 = input("Enter two numbers separated by a comma: ")
 
 average = (num1 + num2) / 2.0
 print "The average is:", average
@@ -211,7 +205,7 @@ In this case, the |input()| command is returning two values on the RHS, so the
 first one gets stored in the first variable on the LHS, and the second one in
 the second variable.  Line 9 works similarly.
 
-\subsection{input() and raw_input()}
+\subsection{input() and raw\_input()}
 Python makes getting user input extremely easy compared to most languages.  As
 you can see, you type something in quotes that will be displayed to the user,
 and whatever the user enters is the return value of |input()|.  Note that it's
@@ -219,9 +213,7 @@ important for the user to behave as expected\textemdash if |input()| gets
 something other than two numbers separated by a comma, the program will fail.
 
 |raw_input()| is similar to |input()|, except that Python does not try to process what
-the user has entered; instead, the input is stored as a single string.  Instead of the
-three-line workaround in the example, we could have used |eval(raw_input('...'))|.  It
-has the same behavior as |input()|, but we went with a more explicit, less magical option.
+the user has entered; instead, the input is stored as a single string.
 
 \section{Example: Reading in a stored network}
 \label{stored_net}
@@ -444,7 +436,7 @@ the end of your degree sequence program from above:
 
 from pylab import hist, show        # import these two functions from the pylab library
 hist(deg_seq, bins=8, range=(1,9))  # hist(deg_seq) will work, but not look very good
-show()                              # open a new window to display the plot
+show()                              # display the plot; necessary with some pylab versions
 \end{Verbatim}
 
 The network is small, of course, but you probably noticed that the distribution is roughly bell-shaped.  This network was generated using the
