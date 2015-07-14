@@ -123,6 +123,7 @@ Most of the time you will not want to be building and editing graphs by hand.  O
 \begin{Verbatim}[numbers = left, samepage=true]
 #!/usr/bin/python
 from networkx import *
+from pylab import show
 
 G = Graph()
 
@@ -131,9 +132,10 @@ G = Graph()
 #
 
 draw(G)
+show()
 \end{Verbatim}
 
-Now you can run your program by pressing the |F5| key or by going to Run\textgreater Run Module.  If your program doesn't work and you get error
+Now you can run your program by pressing |CONTROL-r| or by going to Run\textgreater Run File.  If your program doesn't work and you get error
  messages, usually it's the last error message that you want to focus on.  If you're stuck, let me know and I'll come help.
 
 \section{Constructing a network from an edgelist file}
@@ -189,6 +191,7 @@ Here are some additional functions that you will likely find useful in this exer
 \begin{Verbatim}[samepage=true]
 min(number_list)                # minimum value in the list
 max(number_list)                # maximum value in the list
+sum(number_list)                # sum values in the list
 G.degree().values()             # the degree sequence (a list; use this to make histograms)
 G.degree(52)                    # the degree of node 52
 G.degree()                      # a labeled degree sequence (dicitonary of id, degree pairs)
@@ -232,17 +235,10 @@ In terms of how an infectious disease would propagate through the networks, what
 the urban network and the sexual network? If we took the same individuals in the sexual contact network, but instead connected them based 
 on their ``respiratory contacts,'' how would that network look different?
 
-\section*{Additional exercises}
-\begin{itemize}
- \item Make your program more generic, so that it prompts the user for an edge list filename, and then prints out nicely formatted descriptive statistics for
+\section*{Additional exercise}
+Make your program more generic, so that it prompts the user for an edge list filename, and then prints out nicely formatted descriptive statistics for
 the network.  In order to get the filename from the user, use the function |raw_input()| instead of |input()|\textemdash the difference is that
 |raw_input()| expects a text string, whereas |input()| requires numerical values or quoted strings.
- \item The Python libraries we are using \textit{can} produce some beautiful graphs\textemdash check out the gallery at 
-\texttt{http://networkx.lanl.gov/gallery.html}\textemdash but it can be challenging to get results like that.  I highly recommend Graphviz, 
-which you can learn about and download (free, available for Windows/OS X/Linux) at \texttt{http://www.graphviz.org}.  Note that Graphviz
-is not a Python project; it's a stand-alone software package with a proprietary input format called |dot|.  Fortunately, the input format is quite simple,
-and NetworkX can generate it using |write_dot(G, 'network.dot')|, where |G| is the variable containing your network, followed by the filename you want
-to use.  Try it out, and see if you can make a good visualization of the sexual network!
-\end{itemize}
+
 
 \end{document}
