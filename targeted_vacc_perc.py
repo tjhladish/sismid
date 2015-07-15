@@ -44,7 +44,7 @@ for n in G.nodes():
         G.remove_edges_from(G.edges(n))
         # more verbose, but same result:
         # for e in G.edges(n):
-        #   G.remove_edge(e)
+        #   G.remove_edge(*e)
 '''
 
 ### More general (better) solution
